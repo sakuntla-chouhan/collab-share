@@ -1,0 +1,151 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@layer base {
+  :root {
+    /* White and Black Theme - Dark Mode (Default) */
+    --bg-dark: #000000;
+    --bg-card: rgba(255, 255, 255, 0.05);
+    --bg-card-solid: #121212;
+    --bg-card-hover: rgba(255, 255, 255, 0.08);
+    --border-dim: rgba(255, 255, 255, 0.1);
+    --border-glow: rgba(255, 255, 255, 0.3);
+    
+    --text-primary: #ffffff;
+    --text-secondary: #999999;
+    
+    --accent-indigo: #ffffff;
+    --accent-purple: #f0f0f0;
+    --gradient-primary: linear-gradient(135deg, #333333 0%, #000000 100%);
+    --gradient-glow: 0 0 20px rgba(255, 255, 255, 0.15);
+  }
+
+  .light {
+    /* White and Black Theme - Light Mode */
+    --bg-dark: #ffffff;
+    --bg-card: rgba(0, 0, 0, 0.02);
+    --bg-card-solid: #fcfcfc;
+    --bg-card-hover: rgba(0, 0, 0, 0.04);
+    --border-dim: rgba(0, 0, 0, 0.08);
+    --border-glow: rgba(0, 0, 0, 0.2);
+    
+    --text-primary: #000000;
+    --text-secondary: #555555;
+    
+    --accent-indigo: #000000;
+    --accent-purple: #1a1a1a;
+    --gradient-primary: linear-gradient(135deg, #f0f0f0 0%, #ffffff 100%);
+    --gradient-glow: 0 0 20px rgba(0, 0, 0, 0.1);
+  }
+
+  body {
+    @apply bg-[var(--bg-dark)] text-[var(--text-primary)] antialiased transition-colors duration-500;
+    font-family: 'Outfit', 'Inter', system-ui, -apple-system, sans-serif;
+  }
+}
+
+@layer components {
+  .glass-panel {
+    @apply bg-[var(--bg-card)] border border-[var(--border-dim)] rounded-2xl shadow-xl backdrop-blur-xl transition-all duration-500 overflow-hidden;
+  }
+  
+  .glass-panel:hover {
+    @apply border-[var(--border-glow)] shadow-[var(--gradient-glow)];
+  }
+
+  .btn-primary {
+    @apply border border-[var(--border-dim)] hover:border-[var(--border-glow)] hover:opacity-90 font-bold py-3 px-6 rounded-xl shadow-lg transition-all duration-300 transform hover:-translate-y-1 hover:scale-[1.02] cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed;
+    background: var(--text-primary);
+    color: var(--bg-dark);
+  }
+  
+  .light .btn-primary {
+    background: #000;
+    color: #fff;
+  }
+
+  .btn-secondary {
+    @apply bg-transparent hover:bg-[var(--text-primary)]/5 border border-[var(--border-dim)] text-[var(--text-primary)] font-semibold py-3 px-6 rounded-xl transition-all duration-300;
+  }
+
+  .input-field {
+    @apply w-full bg-black/10 border border-[var(--border-dim)] rounded-xl py-4 px-5 text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent-purple)] focus:ring-2 focus:ring-[var(--accent-purple)]/20 transition-all placeholder:text-[var(--text-secondary)]/50;
+  }
+
+  .heading-gradient {
+    @apply bg-gradient-to-r from-[var(--text-primary)] to-[var(--text-secondary)] bg-clip-text text-transparent;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-glow);
+  border-radius: 10px;
+}
+
+/* Markdown Styles (Refined) */
+.prose {
+  @apply max-w-none text-[var(--text-primary)] leading-relaxed;
+}
+
+.prose h1, .prose h2, .prose h3 {
+  @apply text-[var(--text-primary)] font-black tracking-tight mb-4 mt-8;
+}
+
+.prose h1 { @apply text-4xl; }
+.prose h2 { @apply text-2xl border-b border-[var(--border-dim)] pb-2; }
+.prose h3 { @apply text-xl; }
+
+.prose p { @apply mb-4 opacity-90; }
+
+.prose code {
+  @apply bg-black/30 px-1.5 py-0.5 rounded-md font-mono text-[var(--accent-purple)] border border-[var(--border-dim)] text-sm;
+}
+
+.prose pre {
+  @apply bg-black/40 p-6 rounded-2xl border border-[var(--border-dim)] my-6 overflow-x-auto;
+}
+
+.prose pre code {
+  @apply bg-transparent p-0 border-none text-[var(--text-primary)] text-sm;
+}
+
+.prose ul, .prose ol {
+  @apply pl-6 mb-4 space-y-2;
+}
+
+.prose ul { @apply list-disc; }
+.prose ol { @apply list-decimal; }
+
+.prose blockquote {
+  @apply border-l-4 border-[var(--text-primary)] bg-[var(--text-primary)]/5 p-4 rounded-r-xl italic my-6;
+}
+
+.prose img {
+  @apply rounded-2xl border border-[var(--border-dim)] shadow-2xl my-8;
+}
+
+.prose table {
+  @apply w-full border-collapse my-6 rounded-xl overflow-hidden border border-[var(--border-dim)];
+}
+
+.prose th, .prose td {
+  @apply border border-[var(--border-dim)] p-4 text-left;
+}
+
+.prose th {
+  @apply bg-[var(--text-primary)]/5 font-bold;
+}
+
+/* Tab Active State */
+.tab-active {
+  @apply bg-[var(--text-primary)]/10 text-[var(--text-primary)] border-b-2 border-[var(--text-primary)];
+}
+
